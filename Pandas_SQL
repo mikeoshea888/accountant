@@ -1,0 +1,17 @@
+import numpy as np
+import pandas as pd
+import matplotlib as mp
+import sqlalchemy as db
+import sqlite3
+connection = sqlite3.connect('database')
+engine = db.create_engine('sqlite:/// Database.ac')
+
+## upload CSV
+
+pd.read_csv(r'## Location of file')
+
+connection = sqlite3.connect('database')
+
+data.to_sql('database',connection, if_exists='append')
+
+connection.close()
