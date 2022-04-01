@@ -1,0 +1,51 @@
+book_list=[]
+
+def add_book():
+    a=input('Please type in the name of the book:  ')
+    b= input('Plesae type in the name of the author:  ')
+    d= False
+    c = len(book_list)+1
+    book={'Book Number': c,'Book': a,'Author': b,'Book Read?': d}
+    book_list.append(book)
+    print(book_list)
+
+def remove_book():
+    d=int(input('Plese choose the Book Number you wish to delete:  '))
+    e= d-1
+    str(book_list.pop(e))
+    print(book_list)
+
+
+def read_book():
+    print(book_list)
+    g= int(input('Please choose a book number:  '))
+    g1= g-1
+    print(book_list[g1])
+    book_list[g1]['Book Read?'] = True  
+    print(book_list)
+    
+   
+          
+while(True):
+    option = int(input(""" 
+              1.Add a book
+              2.Remove a book 
+              3.Mark book as read
+              4.Review book list
+              5.Quit the program
+              ------------------------
+              Enter your choice:
+             """))
+    if option== 1:
+      add_book()
+    elif option==2:
+        remove_book()
+    elif option==3:
+        read_book()
+    elif option==4:
+        print(book_list)
+    elif option ==5:
+        break
+    else:
+        print('Invalid option. Please enter a number between 1 and 4.')
+        
