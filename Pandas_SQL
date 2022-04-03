@@ -1,17 +1,30 @@
 import numpy as np
 import pandas as pd
-import matplotlib as mp
-import sqlalchemy as db
 import sqlite3
-connection = sqlite3.connect('database')
-engine = db.create_engine('sqlite:/// Database.ac')
 
-## upload CSV
+# These items create/connect the database and close the database
+#con = sqlite3.connect('data')
+#con.close()
 
-pd.read_csv(r'## Location of file')
+#import dataframe 
+data = pd.read_csv(r'C:\Users',index_col = 0)
+data.head()
 
-connection = sqlite3.connect('database')
 
-data.to_sql('database',connection, if_exists='append')
+# Enter data frame to database - the append line creates a new table or appends the table if it is still created
+con = sqlite3.connect('data')
+data.to_sql('data1',con, if_exists='append')
+con.close()
 
-connection.close()
+
+#SQL query to pandas dataframe
+con = sqlite3.connect('data')
+
+df=pd.read_sql( """
+select * 
+from data1
+
+"""
+               , con)
+con.close()
+df.head()
