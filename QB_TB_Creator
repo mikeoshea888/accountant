@@ -1,0 +1,36 @@
+import pandas as pd
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+
+# Import Files
+current=pd.read_excel(r'.xlsx')
+prior=pd.read_excel(r'.xlsx')
+mapping=pd.read_excel(r'.xlsx')
+coa=pd.read_excel(r'.xlsx')
+
+
+#Current TB
+current1=current.fillna(0)
+current1['Current_Month_DR_CR']=current1.Debit-current1.Credit
+current1['Month']=2
+current1['Year']=2022
+current2=current1[['Description','Current_Month_DR_CR']]
+
+
+#Prior Month TB
+prior1=prior.fillna(0)
+prior1['Prior_Month_DR_CR']=prior1.Debit-prior1.Credit
+prior1['Month']=1
+prior1['Year']=2022
+prior2=prior1[['Description','Prior_Month_DR_CR']]
+
+#Merge TB's 
+merge=current2.merge(prior2, how ="outer")
+merge1=merge.fillna(0)
+merge1['Difference']=merge1.Current_Month_DR_CR -merge1.Prior_Month_DR_CR
+
+
+#Merge TB's & SAP GL accounts
+merge2=pd.merge(merge1,mapping, on ='Description',how='left')
+merge2.head()
