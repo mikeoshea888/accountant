@@ -1,0 +1,10 @@
+Class Database_Connection:
+    def __init__(self,host):
+        self.connect = None
+        self.host= host
+    def __enter__(self):
+        self.connect = sqlite3.connect('self.host')
+        retrun self.connection
+    def __exit__(self, exc_type, exc_value, exc_traceback)
+        self.connection.commit()
+        self.connection.close()
