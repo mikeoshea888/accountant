@@ -15,7 +15,6 @@ class Database_Connection:
 
 from .database_conn import Database_Connection
 
-with Database_Connection('data.db') as connection:
-    cursor=connection.cursor()
-    
-    cursor.execute('SQL Code')
+with Database_Connection(database) as connection:
+        cursor=connection.cursor()
+        cursor.execute()
