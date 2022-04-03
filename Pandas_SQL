@@ -1,10 +1,13 @@
 import numpy as np
 import pandas as pd
 import sqlite3
+pd.set_option('display.max_columns', None)
+
 
 # These items create/connect the database and close the database
 #con = sqlite3.connect('data')
 #con.close()
+
 
 #import dataframe 
 data = pd.read_csv(r'C:\Users',index_col = 0)
