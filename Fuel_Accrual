@@ -1,0 +1,23 @@
+import pandas as pd
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+#Import files
+fuel=pd.read_csv (r'')
+gv=pd.read_excel (r'')
+fleet=pd.read_excel (r'')
+
+#Groupby GL data for fuel 
+fuel1=fuel[fuel['GL_ID']==123]
+fuel2=fuel1[fuel1['Company Code']==123]
+fuel3=fuel2.loc[:,['Tail/Aircraft','LC2 amount']]
+fuel4=fuel3.groupby(['Tail/Aircraft']).sum()
+
+#Merge actuals with data from the flight information system and the fleet lising 
+merge=pd.merge(fuel4,gv, on ='Tail/Aircraft',how='outer')
+merge1=pd.merge(merge,fleet, on ='Tail/Aircraft',how='outer')
+merge1['Fuel Accrual']=merge1['GV']-merge1['LC2 amount']
+merge1.head()
+
+#Export CSV File
+merge1.to_csv(r'')
