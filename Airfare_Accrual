@@ -1,0 +1,26 @@
+import pandas as pd
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+#Upload 
+df=pd.read_excel(r'')
+mapping=pd.read_excel(r'').drop_duplicates()
+head_count=pd.read_excel(r'').drop_duplicates()
+df.fillna(0)
+head_count.head()
+
+#filter out the transactions types and preform a 'Union" of the two datasets.
+df2=df[(df['Start/Check-in Date'] >= '2022-03-01') & (df['Start/Check-in Date'] < '2022-03-31')]
+df3=df2[df2['Trans Type']=='Sale']
+df4=df2[df2['Trans Type']=='Exchange']
+df5=pd.concat([df3,df4])
+df5.head()
+
+#Merge TB's & SAP GL accounts
+merge2=pd.merge(df5,mapping, on ='Traveler Name',how='left')
+merge3=pd.merge(merge2,head_count, on = 'Employee_ID',how='left')
+merge4=merge3.drop_duplicates('Invoice #')
+merge4.head()
+
+# Write File to CSV
+merge4.to_csv(r'')
